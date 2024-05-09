@@ -26,7 +26,7 @@ Mocha is used in combination with Chai for testing the app.
 
 ![Mocha & Chai](https://miro.medium.com/max/499/0*WpXBkrfgR2g9dw2T.png)
 
-# Task
+# Tasks
 ## 0. Redis utils
 
 Inside the folder utils, create a file redis.js that contains the class RedisClient.
