@@ -1,5 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable no-unused-vars */
+
 import { tmpdir } from 'os';
 import { promisify } from 'util';
 import Queue from 'bull/lib/queue';
@@ -54,8 +55,8 @@ const isValidId = (id) => {
 export default class FilesController {
   /**
    * Uploads a file.
-   * @param {Request} req The Express request object.
-   * @param {Response} res The Express response object.
+   * @param {Request} req Express request object.
+   * @param {Response} res Express response object.
    */
   static async postUpload(req, res) {
     const { user } = req;
@@ -97,7 +98,6 @@ export default class FilesController {
       ? process.env.FOLDER_PATH.trim()
       : joinPath(tmpdir(), DEFAULT_ROOT_FOLDER);
     // default baseDir == '/tmp/files_manager'
-    // or (on Windows) '%USERPROFILE%/AppData/Local/Temp/files_manager';
     const newFile = {
       userId: new mongoDBCore.BSON.ObjectId(userId),
       name,
@@ -116,7 +116,7 @@ export default class FilesController {
     const insertionInfo = await (await dbClient.filesCollection())
       .insertOne(newFile);
     const fileId = insertionInfo.insertedId.toString();
-    // start thumbnail generation worker
+    // starts the thumbnail generation worker
     if (type === VALID_FILE_TYPES.image) {
       const jobName = `Image thumbnail [${userId}-${fileId}]`;
       fileQueue.add({ userId, fileId, name: jobName });
@@ -160,9 +160,9 @@ export default class FilesController {
   }
 
   /**
-   * Retrieves files associated with a specific user.
-   * @param {Request} req The Express request object.
-   * @param {Response} res The Express response object.
+   * Retrieves user associated files.
+   * @param {Request} req Express request object.
+   * @param {Response} res Express response object.
    */
   static async getIndex(req, res) {
     const { user } = req;
@@ -260,8 +260,8 @@ export default class FilesController {
 
   /**
    * Retrieves the content of a file.
-   * @param {Request} req The Express request object.
-   * @param {Response} res The Express response object.
+   * @param {Request} req Express request object.
+   * @param {Response} res Express response object.
    */
   static async getFile(req, res) {
     const user = await getUserFromXToken(req);
