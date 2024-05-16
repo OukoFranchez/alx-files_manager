@@ -1,8 +1,7 @@
-/* eslint-disable import/no-named-as-default */
-import { v4 as uuidv4 } from 'uuid';
-import redisClient from '../utils/redis';
+const { v4: uuidv4 } = require('uuid');
+const redisClient = require('../utils/redis');
 
-export default class AuthController {
+class AuthController {
   static async getConnect(req, res) {
     const { user } = req;
     const token = uuidv4();
@@ -18,3 +17,5 @@ export default class AuthController {
     res.status(204).send();
   }
 }
+
+module.exports = { AuthController };
