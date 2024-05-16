@@ -1,11 +1,10 @@
-/* eslint-disable import/no-named-as-default */
-import sha1 from 'sha1';
-import Queue from 'bull/lib/queue';
-import dbClient from '../utils/db';
+const sha1 = require('sha1');
+const Queue = require('bull/lib/queue');
+const dbClient = require('../utils/db');
 
 const userQueue = new Queue('email sending');
 
-export default class UsersController {
+class UsersController {
   static async postNew(req, res) {
     const email = req.body ? req.body.email : null;
     const password = req.body ? req.body.password : null;
@@ -39,3 +38,5 @@ export default class UsersController {
     res.status(200).json({ email: user.email, id: user._id.toString() });
   }
 }
+
+module.exports = { UsersController };

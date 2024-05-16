@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs';
+const { existsSync, readFileSync } = require('fs');
 
 /**
  * Loads the appropriate environment variables for an event.
@@ -19,4 +19,4 @@ const envLoader = () => {
   }
 };
 
-export default envLoader;
+module.exports = envLoader;
