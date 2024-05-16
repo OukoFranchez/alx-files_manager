@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { Request, Response, NextFunction } from 'express';
-import { getUserFromXToken, getUserFromAuthorization } from '../utils/auth';
+const { Request, Response, NextFunction } = require('express');
+const { getUserFromXToken, getUserFromAuthorization } = require('../utils/auth');
 
 /**
  * Applies Basic authentication to a route.
